@@ -1,0 +1,19 @@
+/* css reset  */
+body, div, dl, dt, dd, ul, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, blockquote{
+  margin: 0;
+  padding: 0;
+}
+
+/* css 继承的能力 */
+html {
+  color: #111111;
+  background-color: #ffffff;
+}
+
+body, td, th {
+  font: 12px Helvetica, Arial, sans-serif;
+  line-height: 1.62;
+}
+body {
+  padding: 30px;
+}
