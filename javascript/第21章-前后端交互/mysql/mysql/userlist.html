@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/buttons.css">
+		<script src = 'ajax.js'></script>
+		<script src = 'tool.js'></script>
+		<script>
+			window.onload = function(){
+				var oBtn = document.getElementById("btn1");
+				var oT1 = document.getElementById("t1");
+
+				oBtn.onclick = function(){
+					$ajax({
+						method: "get",
+						url: "userlist.php",
+						success: function(result){
+							var arr = JSON.parse(result);
+							//通过循环创建节点添加到页面上
+							var str = ``;
+							for(var i = 0; i < arr.length; i++){
+								str += `<tr>
+									<td>${arr[i].id}</td>
+									<td>${arr[i].username}</td>
+									<td>${arr[i].password}</td>
+									<td>${showTime(Number(arr[i].create_time))}</td>
+									<td>
+										<a href = "#">删除</a>
+										/
+										<a href = "#">修改</a>
+									</td>
+								</tr>`;
+							}
+
+							oT1.innerHTML = str;
+						},
+						error: function(msg){
+							alert(msg);
+						}
+					})
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class = 'container'>
+			<div class = 'panel panel-primary'>
+				<div class = 'panel-heading'>
+					<h2>获取用户列表</h2>
+				</div>
+				<div class = 'panel-body'>
+					<button id = 'btn1' class = 'form-control button button-3d button-primary button-rounded'>获取用户数据</button>
+					<br><br>
+					<table class = 'table table-bordered  table-hover'>
+						<thead>
+							<tr>
+								<th>用户id</th>
+								<th>用户名</th>
+								<th>密码</th>
+								<th>注册日期</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id = 't1'>
+							
+						</tbody>
+					</table>
+				</div>
+				<div class = 'panel-footer'></div>
+			</div>
+		</div>
+	</body>
+</html>
